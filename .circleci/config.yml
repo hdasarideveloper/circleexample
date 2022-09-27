@@ -34,7 +34,13 @@ jobs:
           command: "echo Hello, World!"
       - run:
           name: "This is a sample run"
-          command: node -v 
+          command: |
+            node -v 
+            mkdir -p /tmp/artifacts
+            cd /tmp/artifacts
+            touch test.txt
+      - store_artifacts:
+          path: /tmp/artifacts
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
