@@ -16,9 +16,11 @@ jobs:
     docker:
       - image: cimg/base:stable
     steps:
+      - attach_workspace:
+          at: /tmp/artifacts
       - run:
           name: "test 01"
-          command: "echo thi sis test01"
+          command: cat /tmp/artifact/test.txt
 
   say-hello:
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
@@ -40,9 +42,11 @@ jobs:
             cd /tmp/artifacts
             touch test.txt
             echo "samplefdjkhfdjkhfd kjdhfkjdhf dfhkjhk khdfkjdhfk jhfkjh kjhfdkjhdfkjhkjhfdjkh fkjhjkhfd" > test.txt
-      - store_artifacts:
-          path: /tmp/artifacts
-          destination: sample
+      - persist_to_workspace:
+          root: /tmp/artifacts
+          paths:
+            - test.txt
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
