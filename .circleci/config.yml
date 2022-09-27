@@ -5,6 +5,13 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+  approval-job:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run:
+          name: "test 01"
+          command: "echo thi sis test01"
   test-job:
     docker:
       - image: cimg/base:stable
@@ -35,6 +42,11 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - test-job:
+      - test-job        
+      - Hold-for-Approval:
+          type: approval
           requires:
-            - say-hello
+            - test-job
+      - approval-job:
+          requires:
+              - Hold-for-Approval
