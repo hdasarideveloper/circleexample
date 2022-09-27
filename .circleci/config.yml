@@ -42,11 +42,9 @@ workflows:
   say-hello-workflow:
     jobs:
       - say-hello
-      - test-job        
+      - test-job      
       - Hold-for-Approval:
           type: approval
-          requires:
-            - test-job
       - approval-job:
           requires:
               - Hold-for-Approval
