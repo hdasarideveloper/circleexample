@@ -39,6 +39,7 @@ jobs:
             mkdir -p /tmp/artifacts
             cd /tmp/artifacts
             touch test.txt
+            echo "samplefdjkhfdjkhfd kjdhfkjdhf dfhkjhk khdfkjdhfk jhfkjh kjhfdkjhdfkjhkjhfdjkh fkjhjkhfd" > test.txt
       - store_artifacts:
           path: /tmp/artifacts
           destination: sample
